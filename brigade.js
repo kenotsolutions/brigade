@@ -7,7 +7,7 @@ events.on("exec", () => {
 
 	console.log("==> handling an 'exec' eventisdfsdfsdfsdf")
 
-	var acr = new Job("job-runner-acr-builder")
+	var acr = new Job("job-runner-acr-builder-tg")
 	    acr.storage.enabled = false
 	    acr.image = "busybox"
 	    acr.tasks = [
