@@ -8,13 +8,6 @@ events.on("push", (brigadeEvent, project) => {
 
     console.log("started")
 	
-    var acr = new Job("job-runner-acr-builder")
-   
     console.log(gitPayload)
 
-
-    var pipeline = new Group()
-
-    pipeline.add(acr)
-    pipeline.runEach()
 })
