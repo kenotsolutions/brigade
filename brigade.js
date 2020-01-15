@@ -7,7 +7,6 @@ events.on("push", (brigadeEvent, project) => {
     var gitSHA = brigadeEvent.revision.commit.substr(0,7)
 
     console.log("started")
-	
     console.log(gitPayload)
 
 })
