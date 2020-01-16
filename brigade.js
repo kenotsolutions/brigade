@@ -21,7 +21,7 @@ events.on("push", (brigadeEvent, project) => {
 //		    	 ` echo "test"`
 //		        ]
 //
-	console.log("gitSHA-->"gitSHA)
+	console.log("gitSHA-->" + String(gitSHA))
 
 
 	var helm = new Job("job-runner-helm")
