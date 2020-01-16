@@ -10,7 +10,7 @@ events.on("push", (brigadeEvent, project) => {
 	var today = new Date()
 	var gitSHA = brigadeEvent.revision.commit.substr(0,7)
          
-	const comment = gitPayload.body.comment.body.trim();
+//	const comment = gitPayload.body.comment.body.trim();
 
 
 
@@ -32,7 +32,7 @@ events.on("push", (brigadeEvent, project) => {
 
 		            `helm repo add stable "https://kubernetes-charts.storage.googleapis.com"`,
 		            `helm upgrade --install graylog stable/graylog`,
-		            `echo "comments:  " ${comment}`
+		            `echo "comments:  "`
 		        ]
 
 	var pipeline = new Group()
