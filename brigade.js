@@ -10,7 +10,7 @@ events.on("push", (brigadeEvent, project) => {
 	var today = new Date()
 	var gitSHA = brigadeEvent.revision.commit.substr(0,7)
          
-	const comment = payload.body.comment.body.trim();
+	const comment = gitPayload.body.comment.body.trim();
 
 
 
