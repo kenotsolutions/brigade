@@ -31,7 +31,7 @@ events.on("push", (brigadeEvent, project) => {
 	helm.tasks = [
 
 		            `helm repo add stable "https://kubernetes-charts.storage.googleapis.com"`,
-		            `helm upgrade --install graylog stable/graylog`,
+		            `helm upgrade --install memcached stable/memcached`,
 		            `echo "comments:  "`
 		        ]
 
