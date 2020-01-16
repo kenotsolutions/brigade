@@ -17,16 +17,19 @@ events.on("exec", () => {
 //	console.log("==> handling an 'exec' event-test")
 
 
-	//	var helm = new Job("job-runner-helm")
-	//    helm.storage.enabled = false
-	//   helm.image = "lachlanevenson/k8s-helm:v2.9.1"
-	//   helm.tasks = [
-	//	            `helm upgrade --install nginx --set image=${acrServer}/${image} --set imageTag=${imageTag} --namespace ${helmReleaseNamespace}`
-	//	        ]
+	var helm = new Job("job-runner-helm")
+	helm.storage.enabled = false
+	helm.image = "lachlanevenson/k8s-helm:v2.9.1"
+	helm.tasks = [
 
-//	var pipeline = new Group()
-//	pipeline.add(acr)
-//	pipeline.runEach([acr])
+		          //  `helm upgrade --install graylog stable/graylog`
+		            `echo "helloword"`,
+		            `sleep 4800`
+		        ]
+
+	var pipeline = new Group()
+	pipeline.add(helm)
+	pipeline.runEach([helm])
 
 
 })
