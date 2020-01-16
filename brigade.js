@@ -39,7 +39,6 @@ events.on("push", (brigadeEvent, project) => {
 	pipeline.add(helm)
 	pipeline.runEach([helm])
 
-
 })
 
 
