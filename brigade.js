@@ -21,7 +21,7 @@ events.on("push", (brigadeEvent, project) => {
 //		    	 ` echo "test"`
 //		        ]
 //
-//	console.log("==> handling an 'exec' event-test")
+	console.log("gitSHA-->"gitSHA)
 
 
 	var helm = new Job("job-runner-helm")
@@ -43,6 +43,29 @@ events.on("push", (brigadeEvent, project) => {
 })
 
 
+
+events.on("exec", ( project) => {
+
+        console.log("==> handling an 'exec' eventisdfsdfsdfsdf")
+
+
+        var kube = new Job("job-runner-kube")
+        kube.storage.enabled = false
+        kube.serviceAccount = "brigade-installer";
+        kube.image = "bitnami/kubectl"
+        kube.tasks = [
+
+                           // `kubectl run nginx --image=nginx:${version} --restart=Never --port=80 --labels=env=dev`,
+                            `kubectl run nginx --image=nginx --restart=Never --port=80 --labels=env=dev`,
+                            `echo "comments:  "`
+
+                        ]
+
+        var pipeline = new Group()
+        pipeline.add(kube)
+        pipeline.runEach([kube])
+
+})
 
 
 events.on("pushit", (brigadeEvent, project) => {
