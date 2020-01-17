@@ -52,10 +52,13 @@ events.on("exec", ( project) => {
         var kube = new Job("job-runner-kube")
         kube.storage.enabled = false
         kube.serviceAccount = "brigade-installer";
-        kube.image = "bitnami/kubectl"
+        //kube.image = "bitnami/kubectl"
+        kube.image = "docker:19.03"
         kube.tasks = [
 
+
                            // `kubectl run nginx --image=nginx:${version} --restart=Never --port=80 --labels=env=dev`,
+			  //  `sleep 4800`,
                             `kubectl run nginx --image=nginx --restart=Never --port=80 --labels=env=dev`,
                             `echo "comments:  "`
 
