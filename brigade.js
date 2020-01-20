@@ -49,16 +49,36 @@ events.on("exec", ( project) => {
         console.log("==> handling an 'exec' eventisdfsdfsdfsdf")
 
 
+	//var driver = project.secrets.DOCKER_DRIVER || "overlay"
+	var driver =  "overlay"
+
+// Build and push a Docker image.
+const docker = new Job("dind", "docker:stable-dind")
+docker.privileged = true;
+docker.env = {
+  DOCKER_DRIVER: driver
+}
+docker.tasks = [
+  "dockerd-entrypoint.sh &",
+  "sleep 20000",
+  "cd /src",
+  "docker build -t brigadecore/kashti:canary ."
+];
+
+docker.run()
+
+
         var kube = new Job("job-runner-kube")
         kube.storage.enabled = false
         kube.serviceAccount = "brigade-installer";
         //kube.image = "bitnami/kubectl"
-        kube.image = "docker:19.03"
+        kube.image = "buildah/buildah"
+        //kube.image = "kenotsolutions/ubuntumakisu:latest"
         kube.tasks = [
 
 
                            // `kubectl run nginx --image=nginx:${version} --restart=Never --port=80 --labels=env=dev`,
-			  //  `sleep 4800`,
+			    `sleep 4800`,
                             `kubectl run nginx --image=nginx --restart=Never --port=80 --labels=env=dev`,
                             `echo "comments:  "`
 
