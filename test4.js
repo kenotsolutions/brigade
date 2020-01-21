@@ -6,7 +6,8 @@ const kubernetes = require("@kubernetes/client-node");
 events.on("exec", ( project) => {
 
     console.log("==> handling an 'exec' from commandline")
-    var kube = new Job("job-runner-kube")
+
+    const kube = new Job("job-runner-kube")
     kube.storage.enabled = false
     kube.serviceAccount = "brigade-installer";
     kube.image = "bitnami/kubectl"
