@@ -16,7 +16,6 @@ docker.env.DOCKER_PASS = project.secrets.dockerPass
 
 docker.tasks = [
   "dockerd-entrypoint.sh &",
-  "sleep 20000",
   "cd /src",
   "docker build -t kenotsolutions/nginx-brigade:latest .", // Replace with your own image tag
   "docker login -u $DOCKER_USER -p $DOCKER_PASS",
