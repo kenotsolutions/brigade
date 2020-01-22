@@ -24,3 +24,37 @@ events.on("push", (brigadeEvent, project) => {
     kube.run()
 
 })
+
+function runSuite(e, p) {
+  return Promise.all([
+    listFiles(e, "ls").catch((err) => { return err }),
+    listFiles(e, "ls -ali").catch((err) => { return err }),
+    listFiles(e, "cat Dockerfile").catch((err) => { return err }),
+  ])
+    .then((values) => {
+      values.forEach((value) => {
+        if (value instanceof Error) throw value;
+      });
+    })
+    .then(() => {
+      if (e.revision.ref == "master") {
+        // This builds and publishes "edge" images
+        buildAndPublishImages(p, "").run();
+      }
+    });
+}
+
+
+function listFiles(project, command) {
+  var job = new Job("build-and-publish-images", "docker:stable-dind");
+  job.privileged = true;
+  job.serviceAccount = "brigade-installer";
+  job.tasks = [
+    "sleep 20",
+    "cd /src",
+    "{command}"
+  ];
+  return job;
+}
+
+events.on("runSuite:requested", runSuite);
