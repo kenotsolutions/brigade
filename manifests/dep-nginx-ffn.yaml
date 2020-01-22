@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx-ffn
+  name: nginx-ffn
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-ffn
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx-ffn
+    spec:
+      containers:
+      - image: nginx:1.16.1
+        name: nginx-ffn
+        resources: {}
+status: {}
