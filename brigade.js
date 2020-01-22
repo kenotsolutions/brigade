@@ -31,8 +31,8 @@ function runSuite(e, p) {
 
   g = new Group();
 
-  g.add(listFiles(e))
-  g.add(listFiles2(e))
+  g.add(listFiles(e,"testtolgay"))
+  //g.add(listFiles2(e))
 
   return g.runAll()
 
@@ -45,9 +45,9 @@ function runSuite(e, p) {
    
 }
 
-function listFiles(project) {
+function listFiles(project,command ) {
   console.log ("in list files")
-  var job = new Job("build-and-publish-images", "kenotsolutions/baseinstaller");
+  var job = new Job("build-and-publish-images2", "kenotsolutions/baseinstaller");
 
   //job.privileged = true;
   console.log ("in list files-ss");
@@ -55,8 +55,10 @@ function listFiles(project) {
   job.tasks = [
     `sleep 20`,
     `cd /src`,
-    `echo "kljlklkj" >>aaaa.html`,
-    `sleep 20`
+    `echo "2kljlklkj" >>aaaa.html`,
+    `echo "test me ${command}  >>> aaaa.html"`,
+    `sleep 400`
+
    // `${command}`
   ];
   return job;
@@ -73,7 +75,7 @@ function listFiles2(project) {
   job.tasks = [
     "sleep 20",
     "cd /src",
-    "${command}"
+    `echo "kljlklkj" >>aaaa.html`,
   ];
   return job;
 }
