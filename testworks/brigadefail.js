@@ -29,12 +29,11 @@ events.on("push", (brigadeEvent, project) => {
 
 function runSuite(e, p) {
 
-  g = new Group();
-
-  g.add(listFiles(e))
-  g.add(listFiles2(e))
-
-  return g.runAll()
+  return Group.runAll([
+    listFiles(e),
+    listFiles2(e)
+  
+  ])
 
   // return Promise.all([
   //   console.log ("in promise all"),
@@ -53,11 +52,9 @@ function listFiles(project) {
   console.log ("in list files-ss");
   job.serviceAccount = "brigade-installer";
   job.tasks = [
-    `sleep 20`,
-    `cd /src`,
-    `echo "kljlklkj" >>aaaa.html`,
-    `sleep 20`
-   // `${command}`
+    "sleep 20",
+    "cd /src",
+    "${command}"
   ];
   return job;
 }
