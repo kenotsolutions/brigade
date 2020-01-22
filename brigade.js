@@ -28,22 +28,13 @@ events.on("push", (brigadeEvent, project) => {
 })
 
 function runSuite(e, p) {
+
   return Promise.all([
-    listFiles(e, "ls").catch((err) => { return err }),
-    listFiles(e, "ls -ali").catch((err) => { return err }),
-    listFiles(e, "cat Dockerfile").catch((err) => { return err }),
+    listFiles(e, "ls"),//.catch((err) => { return err }),
+    listFiles(e, "ls -ali"),//.catch((err) => { return err }),
+    listFiles(e, "cat Dockerfile"),//.catch((err) => { return err }),
   ])
-    .then((values) => {
-      values.forEach((value) => {
-        if (value instanceof Error) throw value;
-      });
-    })
-    .then(() => {
-      if (e.revision.ref == "master") {
-        // This builds and publishes "edge" images
-        buildAndPublishImages(p, "").run();
-      }
-    });
+   
 }
 
 
