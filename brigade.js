@@ -1,6 +1,6 @@
 const { events, Job, Group } = require('brigadier')
 
-events.on("exec", (brigadeEvent, project) => {	
+events.on("push", (brigadeEvent, project) => {	
 
 	console.log("==> handling an 'push triggered'")
 //	var gitPayload = JSON.parse(brigadeEvent.payload)
@@ -16,9 +16,9 @@ events.on("exec", (brigadeEvent, project) => {
         kube.serviceAccount = "brigade-installer";
         kube.image = "kenotsolutions/baseinstaller"
          kube.tasks = [
-                `sleep 4800`,
-                `kustimze`,
-                `echo "comments:  "`
+                `sleep 5`,
+                `kustomize build /src/manifests/. | kubectl apply -f -`,
+                `echo "comments: new image deployed  "`
               ];
 
     kube.run()
