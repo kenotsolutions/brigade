@@ -3,11 +3,11 @@ const { events, Job, Group } = require('brigadier')
 events.on("exec", (brigadeEvent, project) => {	
 
 	console.log("==> handling an 'push triggered'")
-	var gitPayload = JSON.parse(brigadeEvent.payload)
+//	var gitPayload = JSON.parse(brigadeEvent.payload)
 	var today = new Date()
-	var gitSHA = brigadeEvent.revision.commit.substr(0,7)
+//	var gitSHA = brigadeEvent.revision.commit.substr(0,7)
          
-	console.log("gitSHA-->" + String(gitSHA))
+//	console.log("gitSHA-->" + String(gitSHA))
 
 	const { events, Job } = require("brigadier")
         
