@@ -31,54 +31,41 @@ function runSuite(e, p) {
 
   g = new Group();
 
-  g.add(listFiles(e,"testtolgay"))
-  //g.add(listFiles2(e))
 
-  return g.runAll()
-
-  // return Promise.all([
-  //   console.log ("in promise all"),
-  //   listFiles(e, "ls"),//.catch((err) => { return err }),
-  //   listFiles(e, "ls -ali"),//.catch((err) => { return err }),
-  //   listFiles(e, "cat Dockerfile"),//.catch((err) => { return err }),
-  // ])
-   
-}
-
-function listFiles(project,command ) {
-  console.log ("in list files")
-  var job = new Job("build-and-publish-images2", "kenotsolutions/baseinstaller");
-
-  //job.privileged = true;
-  console.log ("in list files-ss");
-  job.serviceAccount = "brigade-installer";
-  job.tasks = [
+  var job1 = new Job("build-and-publish-images", "kenotsolutions/baseinstaller");
+  var todayjob1 = new Date()
+  console.log ("in list files-ss-1 ${String(todayjob1)}");
+  job1.serviceAccount = "brigade-installer";
+  job1.tasks = [
     `sleep 20`,
     `cd /src`,
     `echo "2kljlklkj" >>aaaa.html`,
-    `echo "test me ${command}  >>> aaaa.html"`,
-    `sleep 400`
+    //`echo "test me ${command}  >>> aaaa.html"`,
+    `sleep 40`
 
    // `${command}`
   ];
-  return job;
-}
+  var todayjob1 = new Date()
+  console.log ("in list files-ss-1-end ${String(todayjob1)}");
 
+  var job2 = new Job("build-and-publish-images-2", "kenotsolutions/baseinstaller");
 
-function listFiles2(project) {
-  console.log ("in list files")
-  var job = new Job("build-and-publish-images", "kenotsolutions/baseinstaller");
-
-  //job.privileged = true;
-  console.log ("in list files-ss");
-  job.serviceAccount = "brigade-installer";
-  job.tasks = [
+  var todayjob2 = new Date()
+  console.log ("in list files-ss-2 ${String(todayjob2)}");
+  job2.serviceAccount = "brigade-installer";
+  job2.tasks = [
     "sleep 20",
     "cd /src",
     `echo "kljlklkj" >>aaaa.html`,
   ];
-  return job;
-}
+  
+  var todayjob2 = new Date()
+  console.log ("in list files-ss-2-end ${String(todayjob2)}");
 
+  g.add(job1)
+  g.add(job2)
+
+  return g.runAll()
+}
 
 events.on("runSuite:requested", runSuite);
